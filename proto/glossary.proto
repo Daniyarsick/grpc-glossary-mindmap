@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package glossary;
+
+service GlossaryService {
+  rpc GetTerm(GetTermRequest) returns (Term);
+  rpc AddTerm(AddTermRequest) returns (Term);
+  rpc ListTerms(ListTermsRequest) returns (TermList);
+}
+
+message Term {
+  string id = 1;
+  string term = 2;
+  string definition = 3;
+  repeated string source_links = 4;
+  repeated string related_term_ids = 5;
+}
+
+message GetTermRequest {
+  string term_id = 1;
+}
+
+message AddTermRequest {
+  string term = 1;
+  string definition = 2;
+  repeated string source_links = 3;
+  repeated string related_term_ids = 4;
+}
+
+message ListTermsRequest {
+  // No parameters for now, will list all terms.
+}
+
+message TermList {
+  repeated Term terms = 1;
+}
